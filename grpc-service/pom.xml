@@ -14,14 +14,10 @@
 
     <developers>
         <developer>
-            <name>A Sarang Kumar Tak</name>
-            <email>sarangdevproblems@gmail.com</email>
-            <url>hhttps://www.linkedin.com/in/sarang-kumar-tak-1454ba111/</url>
-            <organization>Youtube</organization>
-            <organizationUrl>https://www.youtube.com/channel/UCVno4tMHEXietE3aUTodaZQ</organizationUrl>
+            <name>Saurabh Maithani</name>
+            <email>saurabhmaithani01921@gmail.com</email>
         </developer>
     </developers>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
