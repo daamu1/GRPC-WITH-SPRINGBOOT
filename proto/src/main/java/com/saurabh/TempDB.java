@@ -1,7 +1,7 @@
 package com.saurabh;
 
-import com.saurabh.proto.Author;
-import com.saurabh.proto.Book;
+import com.saurabh.Author;
+import com.saurabh.Book;
 import java.util.ArrayList;
 import java.util.List;
 

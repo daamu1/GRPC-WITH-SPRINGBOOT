@@ -1,8 +1,8 @@
 package com.saurabh.grpc.server;
 
-import com.saurabh.proto.Author;
-import com.saurabh.proto.Book;
-import com.saurabh.proto.BookAuthorServiceGrpc;
+import com.saurabh.Author;
+import com.saurabh.Book;
+import com.saurabh.BookAuthorServiceGrpc;
 import com.saurabh.TempDB;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
