@@ -1,11 +1,11 @@
-package com.saurabh.grpc.server.repository;
+package com.saurabh.repository;
 
-import com.saurabh.grpc.server.model.Book;
+import com.saurabh.model.GrpcBook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @EnableJpaRepositories
-public interface BookRepository extends JpaRepository<Book,Long> {
+public interface BookRepository extends JpaRepository<GrpcBook,Long> {
 }

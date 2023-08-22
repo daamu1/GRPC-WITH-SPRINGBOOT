@@ -1,3 +1,16 @@
 grpc:
   server:
     port: 9000
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/-grpc_db?useSSL=false
+
+    password: saurabh123
+    username: saurabh
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true

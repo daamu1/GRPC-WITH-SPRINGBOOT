@@ -1,9 +1,10 @@
-package com.saurabh;
+package com.saurabh.model;
 
 
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "author") // Specify the name of the database table

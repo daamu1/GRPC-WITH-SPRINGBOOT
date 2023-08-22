@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @EnableJpaRepositories
-public interface AutherRepository extends JpaRepository<GrpcAuthor, Long> {
+public interface AuthorRepository extends JpaRepository<GrpcAuthor, Long> {
 }

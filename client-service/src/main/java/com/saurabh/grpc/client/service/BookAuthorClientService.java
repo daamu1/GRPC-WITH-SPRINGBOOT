@@ -5,9 +5,13 @@ import com.saurabh.Author;
 import com.saurabh.Book;
 import com.saurabh.BookAuthorServiceGrpc;
 import com.google.protobuf.Descriptors;
-import com.saurabh.TempDB;
+import com.saurabh.model.GrpcAuthor;
+import com.saurabh.repository.AuthorRepository;
+import com.saurabh.repository.BookRepository;
 import io.grpc.stub.StreamObserver;
+import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,12 +19,17 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@RequiredArgsConstructor
 public class BookAuthorClientService {
+    @Autowired(required = true)
+    private AuthorRepository authorRepository;
+    @Autowired
+    private static BookRepository bookRepository;
 
-    @GrpcClient("grpc-devproblems-service")
+    @GrpcClient("grpc-saurabh-service")
     BookAuthorServiceGrpc.BookAuthorServiceBlockingStub synchronousClient;
 
-    @GrpcClient("grpc-devproblems-service")
+    @GrpcClient("grpc-saurabh-service")
     BookAuthorServiceGrpc.BookAuthorServiceStub asynchronousClient;
 
     public Map<Descriptors.FieldDescriptor, Object> getAuthor(int authorId) {
@@ -72,7 +81,20 @@ public class BookAuthorClientService {
                 countDownLatch.countDown();
             }
         });
-        TempDB.getBooksFromTempDb().forEach(responseObserver::onNext);
+        List<com.saurabh.model.GrpcBook> getBooksFromTempDb=bookRepository.findAll();
+        List<Book>books=new ArrayList<>();
+        for(com.saurabh.model.GrpcBook book:getBooksFromTempDb)
+        {
+            Book grpcbook=Book.newBuilder()
+                    .setAuthorId(book.getAuthorId())
+                    .setAuthorId(book.getAuthorId())
+                    .setPages(book.getPages())
+                    .setPrice(book.getPrice())
+                    .setTitle(book.getTitle())
+                    .build();
+            books.add(grpcbook);
+        }
+        books.forEach(responseObserver::onNext);
         responseObserver.onCompleted();
         boolean await = countDownLatch.await(1, TimeUnit.MINUTES);
         return await ? response : Collections.emptyMap();
@@ -97,7 +119,20 @@ public class BookAuthorClientService {
                 countDownLatch.countDown();
             }
         });
-        TempDB.getAuthorsFromTempDb()
+        List<GrpcAuthor> getAuthorsFromTemp = authorRepository.findAll();
+        List<Author> authors=new ArrayList<>();
+        for (GrpcAuthor dbAuthor : getAuthorsFromTemp) {
+            // Map the fields from the database entity to the gRPC message
+            Author grpcAuthor = Author.newBuilder()
+                    .setAuthorId(dbAuthor.getAuthorId())
+                    .setFirstName(dbAuthor.getFirstName())
+                    .setLastName(dbAuthor.getLastName())
+                    .setGender(dbAuthor.getGender())
+                    .setBookId(dbAuthor.getBookId())
+                    .build();
+            authors.add(grpcAuthor);
+        }
+        authors
                 .stream()
                 .filter(author -> author.getGender().equalsIgnoreCase(gender))
                 .forEach(author -> responseObserver.onNext(Book.newBuilder().setAuthorId(author.getAuthorId()).build()));

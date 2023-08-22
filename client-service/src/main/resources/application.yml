@@ -3,4 +3,14 @@ grpc:
     grpc-devproblems-service:
       address: static://localhost:9000
       negotiationType: plaintext
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/-grpc_db
+    password: saurabh123
+    username: saurabh
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
