@@ -1,6 +1,6 @@
 grpc:
   client:
-    grpc-devproblems-service:
+    grpc-saurabh-service:
       address: static://localhost:9000
       negotiationType: plaintext
 

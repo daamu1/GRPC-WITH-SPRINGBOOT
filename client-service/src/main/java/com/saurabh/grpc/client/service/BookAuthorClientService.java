@@ -17,10 +17,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class BookAuthorClientService {
 
-    @GrpcClient("grpc-devproblems-service")
+    @GrpcClient("grpc-saurabh-service")
     BookAuthorServiceGrpc.BookAuthorServiceBlockingStub synchronousClient;
 
-    @GrpcClient("grpc-devproblems-service")
+    @GrpcClient("grpc-saurabh-service")
     BookAuthorServiceGrpc.BookAuthorServiceStub asynchronousClient;
 
     public Map<Descriptors.FieldDescriptor, Object> getAuthor(int authorId) {
