@@ -5,6 +5,7 @@ import com.google.protobuf.Descriptors;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,6 +16,13 @@ import java.util.Map;
 public class BookAuthorController {
 
     final BookAuthorClientService bookAuthorClientService;
+    @GetMapping("/hello")
+    public Map<Descriptors.FieldDescriptor, Object> sayHello(
+            @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName
+    ) {
+        return bookAuthorClientService.sayHello(firstName, lastName);
+    }
 
     @GetMapping("/author/{id}")
     public Map<Descriptors.FieldDescriptor, Object> getAuthor(@PathVariable String id) {

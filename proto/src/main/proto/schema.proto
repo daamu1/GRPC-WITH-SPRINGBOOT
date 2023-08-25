@@ -20,8 +20,18 @@ message Author {
   int32 book_id = 5;
 }
 
+message HelloRequest {
+  string firstName = 1;
+  string lastName = 2;
+}
+
+message HelloResponse {
+  string greeting = 1;
+}
 
 service BookAuthorService {
+
+  rpc hello(HelloRequest) returns (HelloResponse);
 
   //unary - synchronous
   //client will send one request and server will respond with one response.

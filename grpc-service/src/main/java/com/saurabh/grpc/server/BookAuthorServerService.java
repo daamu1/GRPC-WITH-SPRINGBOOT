@@ -1,9 +1,6 @@
 package com.saurabh.grpc.server;
 
-import com.saurabh.Author;
-import com.saurabh.Book;
-import com.saurabh.BookAuthorServiceGrpc;
-import com.saurabh.TempDB;
+import com.saurabh.*;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
@@ -13,6 +10,22 @@ import java.util.List;
 
 @GrpcService
 public class BookAuthorServerService extends BookAuthorServiceGrpc.BookAuthorServiceImplBase {
+    @Override
+    public void hello(HelloRequest request, StreamObserver<HelloResponse> responseObserver) {
+        String greeting = new StringBuilder()
+                .append("Hello, ")
+                .append(request.getFirstName())
+                .append(" ")
+                .append(request.getLastName())
+                .toString();
+
+        HelloResponse response = HelloResponse.newBuilder()
+                .setGreeting(greeting)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
 
     @Override
     public void getAuthor(Author request, StreamObserver<Author> responseObserver) {

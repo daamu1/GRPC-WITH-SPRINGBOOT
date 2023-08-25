@@ -1,11 +1,8 @@
 package com.saurabh.grpc.client.service;
 
 
-import com.saurabh.Author;
-import com.saurabh.Book;
-import com.saurabh.BookAuthorServiceGrpc;
 import com.google.protobuf.Descriptors;
-import com.saurabh.TempDB;
+import com.saurabh.*;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
@@ -22,6 +19,16 @@ public class BookAuthorClientService {
 
     @GrpcClient("grpc-saurabh-service")
     BookAuthorServiceGrpc.BookAuthorServiceStub asynchronousClient;
+
+    public Map<Descriptors.FieldDescriptor, Object> sayHello(String firstName, String lastName) {
+        HelloRequest request = HelloRequest.newBuilder()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .build();
+
+        HelloResponse response = synchronousClient.hello(request);
+        return response.getAllFields();
+    }
 
     public Map<Descriptors.FieldDescriptor, Object> getAuthor(int authorId) {
         Author authorRequest = Author.newBuilder().setAuthorId(authorId).build();
